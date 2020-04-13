@@ -3,8 +3,9 @@ yarn.lock
 .prettier*
 tslint.json
 tsconfig.json
+tsconfig.build.json
 src/
 .github/
 .huskyrc
-commitlint.*
+commitlint.config.js
 .eslintrc.js
