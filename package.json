@@ -1,6 +1,6 @@
 {
   "name": "@bonusami/logger",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Common logger module for NestJS projects",
   "author": "Alfonso Reyes <alfonso@devspace.mx>",
   "license": "MIT",
