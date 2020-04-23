@@ -1,20 +1,25 @@
 import { DynamicModule, Global, Provider } from '@nestjs/common';
 import { createLoggerProviders } from './logger.providers';
-import { LoggerService } from './services';
+import { LoggerOptions } from './logger_options.interface';
+import { LoggerService, WinstonService } from './services';
 
 @Global()
-export class LoggerModule {
+export class BonusamiLogger {
   static prefixesForLoggers: string[] = new Array<string>();
-  static forRoot(): DynamicModule {
+  static forRoot(config: LoggerOptions): DynamicModule {
+    // setup winston first
+    const winston = WinstonService.getInstance();
+    winston.setup(config);
+    // create prefixed logger providers, which are 'LoggerService<Custom_Name>'
     const prefixedLoggerProviders: Provider<
       LoggerService
     >[] = createLoggerProviders(this.prefixesForLoggers);
     const providers: Provider<any>[] = [
-      { provide: LoggerService, useValue: new LoggerService('App') },
+      { provide: LoggerService, useValue: new LoggerService() },
       ...prefixedLoggerProviders,
     ];
     return {
-      module: LoggerModule,
+      module: BonusamiLogger,
       providers: providers,
       exports: providers,
     };

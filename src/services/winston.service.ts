@@ -1,13 +1,23 @@
 import { Format, TransformableInfo } from 'logform';
 import stripAnsi from 'strip-ansi';
-import * as winston from 'winston';
+import winston from 'winston';
+import { LoggerOptions } from '../logger_options.interface';
 
-export class WinstonLogger {
+export class WinstonService {
   private logger: winston.Logger;
-  private httpLogger: winston.Logger;
+  static _instance: WinstonService;
 
-  constructor() {
-    this.createLogger();
+  public static getInstance() {
+    // Do you need arguments? Make it a regular static method instead.
+    return this._instance || (this._instance = new this());
+  }
+
+  /**
+   * Setup Winston module
+   * @param options Logger Options object
+   */
+  public setup(options: LoggerOptions) {
+    this.createLogger(options);
   }
 
   /**
@@ -44,25 +54,12 @@ export class WinstonLogger {
   }
 
   /**
-   * Returns JSON log format for Winston use in production
-   *
-   * @returns Format for production mode (JSON format)
-   */
-  private getProductionFormat(): Format {
-    return winston.format.combine(
-      winston.format.uncolorize(),
-      winston.format.timestamp(),
-      winston.format.json(),
-    );
-  }
-
-  /**
    * Creates Winston Logger instance with custom format and stdout transport
    */
-  private createLogger(): void {
+  private createLogger(options: LoggerOptions): void {
     this.logger = winston.createLogger({
-      level: 'info', // minimum logger level
-      silent: false, // logging will be disabled in testing,
+      level: options.level, // minimum logger level
+      silent: options.silent, // logging will be disabled in testing,
       exitOnError: false, // disable exit on error,
     });
     // add stream transport to winston
@@ -76,7 +73,7 @@ export class WinstonLogger {
   }
 
   /**
-   * Returns current logger instance
+   * Returns current Winston Logger instance
    *
    * @returns Winston logger
    */

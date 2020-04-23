@@ -1,17 +1,16 @@
 import { Injectable, Scope } from '@nestjs/common';
 import { Logger } from '../logger.interface';
-import { WinstonLogger } from './winston.service';
-
-type LogLevels = 'error' | 'warn' | 'verbose' | 'info' | 'debug' | 'silly';
+import { LogLevel } from '../log_level.type';
+import { WinstonService } from './winston.service';
 
 @Injectable({ scope: Scope.TRANSIENT })
 export class LoggerService implements Logger {
   private loggerContext: string;
-  private logger: WinstonLogger;
+  private logger: WinstonService;
 
   constructor(context = 'App') {
     this.setContext(context);
-    this.logger = new WinstonLogger();
+    this.logger = WinstonService.getInstance();
   }
 
   /**
@@ -21,9 +20,9 @@ export class LoggerService implements Logger {
    * @param message Message to log
    * @param args Extra arguments
    */
-  private winstonLog(level: LogLevels, message: string, ...args: any[]): void {
-    if (this.getLogger()) {
-      this.getLogger().log({
+  private winstonLog(level: LogLevel, message: string, ...args: any[]): void {
+    if (this.logger.getLogger()) {
+      this.logger.getLogger().log({
         level: level,
         message: message,
         // add context to args
@@ -78,14 +77,5 @@ export class LoggerService implements Logger {
    */
   private getLoggerContext(): string {
     return this.loggerContext;
-  }
-
-  /**
-   * Returns a Winston instance logger
-   *
-   * @returns Winston instance logger
-   */
-  private getLogger() {
-    return this.logger.getLogger();
   }
 }

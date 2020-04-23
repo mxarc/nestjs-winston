@@ -1,5 +1,6 @@
+import { LogLevel } from './log_level.type';
+
 export interface LoggerOptions {
-  level: string;
+  level: LogLevel;
   silent: boolean;
-  production_mode: boolean;
 }
