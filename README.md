@@ -1,4 +1,10 @@
-# bonusami-logger
+<p align="center">
+<img src="logo.png" width="320" title="Logo" alt="Logo">
+</p>
+
+# Overview
+
+This is a Winston based Logger module made for NestJS apps, it has support for a Logging context and it can replace the default NestJS logger implementation.
 
 ## Installation
 
@@ -14,6 +20,9 @@ yarn add @bonusami/logger
 
 Import LoggerModule into your AppModule
 
+Logger Module is a global module so there's no need to import it on every module of your app,
+just import it once on AppModule and it'll be available to use everywhere.
+
 ### Example
 
 ```typescript
@@ -24,6 +33,7 @@ import { BonusamiLogger } from '@bonusami/logger';
     /** Module declaration  */
     BonusamiLogger.forRoot({
       level: 'info',
+      silent: false
     })
     // ... your other module imports
   ],
@@ -62,3 +72,5 @@ export class App {
   }
 }
 ```
+
+More options will come soon like ability to change the log format and add/replace transports

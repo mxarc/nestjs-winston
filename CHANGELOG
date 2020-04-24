@@ -1,1 +1,2 @@
 1.0.0 - initial release
+2.0.0 - support for module config with LoggerModule.forRoot(options), bumped package version to 2.0.0
