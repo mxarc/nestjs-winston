@@ -8,7 +8,6 @@ export class WinstonService {
   static _instance: WinstonService;
 
   public static getInstance() {
-    // Do you need arguments? Make it a regular static method instead.
     return this._instance || (this._instance = new this());
   }
 
