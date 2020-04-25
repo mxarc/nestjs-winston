@@ -1,7 +1,7 @@
 import { Format, TransformableInfo } from 'logform';
 import stripAnsi from 'strip-ansi';
 import winston from 'winston';
-import { LoggerOptions } from '../logger_options.interface';
+import { LoggerOptions } from '../interfaces';
 
 export class WinstonService {
   private logger: winston.Logger;
@@ -9,6 +9,10 @@ export class WinstonService {
 
   public static getInstance() {
     return this._instance || (this._instance = new this());
+  }
+
+  public static deleteInstance() {
+    this._instance = null;
   }
 
   /**

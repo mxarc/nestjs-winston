@@ -1,6 +1,6 @@
 import { DynamicModule, Global, Provider } from '@nestjs/common';
+import { LoggerOptions } from './interfaces';
 import { createLoggerProviders } from './logger.providers';
-import { LoggerOptions } from './logger_options.interface';
 import { LoggerService, WinstonService } from './services';
 
 @Global()

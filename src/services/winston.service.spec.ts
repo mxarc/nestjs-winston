@@ -2,7 +2,7 @@ import { WinstonService } from './winston.service';
 
 describe('winston class', () => {
   beforeEach(async () => {
-    new WinstonService();
+    WinstonService.deleteInstance();
   });
 
   it('should create a valid instance of winston service', () => {
@@ -10,14 +10,14 @@ describe('winston class', () => {
     expect(winstonInstance).toBeInstanceOf(WinstonService);
   });
 
+  it('should create a winston object', () => {
+    const winstonInstance = WinstonService.getInstance();
+    winstonInstance.setup({ level: 'info', silent: true });
+    expect(winstonInstance.getLogger()).toBeDefined();
+  });
+
   it('should fail if no setup procedure was made', () => {
     const winstonInstance = WinstonService.getInstance();
     expect(winstonInstance.getLogger()).toBeUndefined();
-  });
-
-  it('should create a winston object', () => {
-    const winstonInstance = WinstonService.getInstance();
-    winstonInstance.setup({ level: 'info', silent: false });
-    expect(winstonInstance.getLogger()).toBeDefined();
   });
 });

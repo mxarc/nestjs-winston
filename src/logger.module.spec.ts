@@ -21,10 +21,5 @@ describe('bonusami-logger-module', () => {
         BonusamiLogger.forRoot({ level: 'info', silent: false }),
       ).toBeDefined();
     });
-    /*it('should output some messages in stdout', async () => {
-      BonusamiLogger.forRoot({ level: 'info', silent: false });
-      app.useLogger(new NestLogger());
-      await app.init();
-    });*/
   });
 });

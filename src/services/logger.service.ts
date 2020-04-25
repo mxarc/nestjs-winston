@@ -1,6 +1,5 @@
 import { Injectable, Scope } from '@nestjs/common';
-import { Logger } from '../logger.interface';
-import { LogLevel } from '../log_level.type';
+import { Logger, LogLevel } from '../interfaces';
 import { WinstonService } from './winston.service';
 
 @Injectable({ scope: Scope.TRANSIENT })
