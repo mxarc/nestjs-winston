@@ -7,3 +7,4 @@ export * from './logger.decorator';
 export * from './logger.module';
 export * from './services/logger.service';
 export * from './services/nest_logger.service';
+export * from './transports';

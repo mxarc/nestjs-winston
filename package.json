@@ -1,8 +1,8 @@
 {
-  "name": "@bonusami/logger",
-  "version": "2.0.0",
+  "name": "nestjs-winston",
+  "version": "1.0.0",
   "description": "Common logger module for NestJS projects",
-  "author": "Alfonso Reyes <alfonso@devspace.mx>",
+  "author": "Alfonso Reyes <alfonso@molecula.digital>",
   "license": "MIT",
   "private": false,
   "readmeFilename": "README.md",
@@ -38,24 +38,20 @@
     "@nestjs/platform-express": "^7.0.9",
     "@nestjs/testing": "^7.0.9",
     "@types/jest": "^25.2.1",
-    "@types/node": "^13.13.2",
-    "@typescript-eslint/eslint-plugin": "^2.29.0",
-    "@typescript-eslint/parser": "^2.29.0",
+    "@types/node": "^13.13.4",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/parser": "^2.30.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.20.2",
     "husky": "^4.2.5",
-    "jest": "^25.4.0",
+    "jest": "^25.5.0",
     "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
     "supertest": "^4.0.2",
     "ts-jest": "^25.4.0",
     "ts-loader": "^7.0.1",
-    "ts-node": "^8.9.0",
+    "ts-node": "^8.9.1",
     "typescript": "^3.8.3"
-  },
-  "peerDependencies": {
-    "@nestjs/common": "^7.0.0",
-    "@nestjs/core": "^7.0.0"
   }
 }

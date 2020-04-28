@@ -11,9 +11,9 @@ This is a Winston based Logger module made for NestJS apps, it has support for a
 Execute this command in your project folder:
 
 ```bash
-npm install @bonusami/logger
+npm install nestjs-winston
 # or if using yarn
-yarn add @bonusami/logger
+yarn add nestjs-winston
 ```
 
 ## How to enable
@@ -26,15 +26,15 @@ just import it once on AppModule and it'll be available to use everywhere.
 ### Example
 
 ```typescript
-import { BonusamiLogger } from '@bonusami/logger';
+import { LoggerModule } from 'nestjs-winston';
 
 @Module({
   imports: [
     /** Module declaration  */
-    BonusamiLogger.forRoot({
+    LoggerModule.forRoot({
       level: 'info',
-      silent: false
-    })
+      silent: false,
+    }),
     // ... your other module imports
   ],
   controllers: [AppController],
@@ -46,7 +46,7 @@ export class AppModule implements NestModule {}
 Then use the Logger Injector in any of your project classes
 
 ```typescript
-import { Log, Logger } from '@bonusami/logger';
+import { Log, Logger } from 'nestjs-winston';
 
 class UserService {
   constructor(@Log(UserService.name) private readonly logger: Logger) {
@@ -58,7 +58,7 @@ class UserService {
 If you wish to override the default NestJS logger module you can do this by creating an instance of NestLogger and replacing the default logger in the bootstrap method of NestJS
 
 ```typescript
-import { NestLogger } from '@bonusami/logger';
+import { NestLogger } from 'nestjs-winston';
 
 export class App {
   /**

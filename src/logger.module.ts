@@ -4,7 +4,7 @@ import { createLoggerProviders } from './logger.providers';
 import { LoggerService, WinstonService } from './services';
 
 @Global()
-export class BonusamiLogger {
+export class LoggerModule {
   static prefixesForLoggers: string[] = new Array<string>();
   static forRoot(config: LoggerOptions): DynamicModule {
     // setup winston first
@@ -19,7 +19,7 @@ export class BonusamiLogger {
       ...prefixedLoggerProviders,
     ];
     return {
-      module: BonusamiLogger,
+      module: LoggerModule,
       providers: providers,
       exports: providers,
     };

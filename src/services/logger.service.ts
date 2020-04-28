@@ -1,4 +1,5 @@
 import { Injectable, Scope } from '@nestjs/common';
+import * as os from 'os';
 import { Logger, LogLevel } from '../interfaces';
 import { WinstonService } from './winston.service';
 
@@ -17,54 +18,52 @@ export class LoggerService implements Logger {
    *
    * @param level Logger level
    * @param message Message to log
-   * @param args Extra arguments
+   * @param meta Extra data
    */
-  private winstonLog(level: LogLevel, message: string, ...args: any[]): void {
-    if (this.logger.getLogger()) {
-      this.logger.getLogger().log({
+  private logToWinston(level: LogLevel, message: string, ...meta: any[]): void {
+    const logger = this.logger.getLogger();
+    if (logger) {
+      logger.log({
+        pid: process.pid,
+        hostname: os.hostname(),
         level: level,
         message: message,
-        // add context to args
         context: this.getLoggerContext(),
-        // expand the rest of the arguments if they are available
-        args: args,
+        ...(meta[0].length >= 1 && {
+          extra: meta[0],
+        }),
       });
     }
   }
 
-  public info(message: string, ...args: any[]): void {
-    this.winstonLog('info', message, args);
+  public info(message: string, ...meta: any[]): void {
+    this.logToWinston('info', message, meta);
   }
 
-  public error(message: string, trace?: string, ...args: any[]): void {
-    this.winstonLog('error', message, {
+  public error(message: string, trace?: string, ...meta: any[]): void {
+    this.logToWinston('error', message, {
       ...(trace && {
         trace: trace,
       }),
-      ...args,
+      meta,
     });
   }
 
-  public warn(message: string, ...args: any[]): void {
-    this.winstonLog('warn', message, args);
+  public warn(message: string, ...meta: any[]): void {
+    this.logToWinston('warn', message, meta);
   }
 
-  public silly(message: string, ...args: any[]): void {
-    this.winstonLog('silly', message, args);
+  public silly(message: string, ...meta: any[]): void {
+    this.logToWinston('silly', message, meta);
   }
-  public debug(message: string, ...args: any[]): void {
-    this.winstonLog('debug', message, args);
-  }
-
-  public verbose(message: string, ...args: any[]): void {
-    this.winstonLog('verbose', message, args);
+  public debug(message: string, ...meta: any[]): void {
+    this.logToWinston('debug', message, meta);
   }
 
-  /**
-   * Set the context for each log message of this Logger Instance
-   *
-   * @param context The context which should be prepended before every log message
-   */
+  public verbose(message: string, ...meta: any[]): void {
+    this.logToWinston('verbose', message, meta);
+  }
+
   public setContext(context: string) {
     this.loggerContext = context;
   }
@@ -74,7 +73,7 @@ export class LoggerService implements Logger {
    *
    * @returns context The context for the injected logger
    */
-  private getLoggerContext(): string {
+  public getLoggerContext(): string {
     return this.loggerContext;
   }
 }

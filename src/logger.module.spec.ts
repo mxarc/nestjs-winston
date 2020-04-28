@@ -1,13 +1,13 @@
 import { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import 'reflect-metadata';
-import { BonusamiLogger } from './logger.module';
+import { LoggerModule } from './logger.module';
 
-describe('bonusami-logger-module', () => {
+describe('logger-module', () => {
   let app: INestApplication;
 
   it('should be truthy', () => {
-    expect(BonusamiLogger).toBeTruthy();
+    expect(LoggerModule).toBeTruthy();
   });
 
   describe('express app', () => {
@@ -18,7 +18,7 @@ describe('bonusami-logger-module', () => {
 
     it('should run the setup (non-normalized path)', async () => {
       expect(
-        BonusamiLogger.forRoot({ level: 'info', silent: false }),
+        LoggerModule.forRoot({ level: 'info', silent: false }),
       ).toBeDefined();
     });
   });

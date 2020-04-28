@@ -4,7 +4,7 @@ describe('index', () => {
     expect(index).toBeTruthy();
   });
   it('should export logger module', () => {
-    expect(index).toHaveProperty('BonusamiLogger');
+    expect(index).toHaveProperty('LoggerModule');
   });
   it('should export logger decorator', () => {
     expect(index).toHaveProperty('Log');

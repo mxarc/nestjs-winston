@@ -1,6 +1,9 @@
+import winston from 'winston';
+
 export interface LoggerOptions {
   level: LogLevel;
-  silent: boolean;
+  silent?: boolean;
+  transports?: winston.LoggerOptions['transports'];
 }
 
 export type LogLevel =

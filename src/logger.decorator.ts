@@ -1,5 +1,5 @@
 import { Inject } from '@nestjs/common';
-import { BonusamiLogger } from './logger.module';
+import { LoggerModule } from './logger.module';
 import { getLoggerToken } from './utils';
 
 /**
@@ -9,8 +9,8 @@ import { getLoggerToken } from './utils';
  * @returns LoggerService with prefix set
  */
 export const Log = (context = 'App') => {
-  if (!BonusamiLogger.prefixesForLoggers.includes(context)) {
-    BonusamiLogger.prefixesForLoggers.push(context);
+  if (!LoggerModule.prefixesForLoggers.includes(context)) {
+    LoggerModule.prefixesForLoggers.push(context);
   }
   return Inject(getLoggerToken(context));
 };
