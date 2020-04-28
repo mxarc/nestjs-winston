@@ -1,8 +1,8 @@
-<p align="center">
-<img src="logo.png" width="320" title="Logo" alt="Logo">
-</p>
+# nestjs-winston
 
-# Overview
+yes, another winston based logger for NestJS
+
+## Overview
 
 This is a Winston based Logger module made for NestJS apps, it has support for a Logging context and it can replace the default NestJS logger implementation.
 
