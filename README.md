@@ -11,9 +11,9 @@ This is a Winston based Logger module made for NestJS apps, it has support for a
 Execute this command in your project folder:
 
 ```bash
-npm install nestjs-winston
+npm install nestjs-winston-module
 # or if using yarn
-yarn add nestjs-winston
+yarn add nestjs-winston-module
 ```
 
 ## How to enable
@@ -26,7 +26,7 @@ just import it once on AppModule and it'll be available to use everywhere.
 ### Example
 
 ```typescript
-import { LoggerModule } from 'nestjs-winston';
+import { LoggerModule } from 'nestjs-winston-module';
 
 @Module({
   imports: [
@@ -46,7 +46,7 @@ export class AppModule implements NestModule {}
 Then use the Logger Injector in any of your project classes
 
 ```typescript
-import { Log, Logger } from 'nestjs-winston';
+import { Log, Logger } from 'nestjs-winston-module';
 
 class UserService {
   constructor(@Log(UserService.name) private readonly logger: Logger) {
@@ -58,7 +58,7 @@ class UserService {
 If you wish to override the default NestJS logger module you can do this by creating an instance of NestLogger and replacing the default logger in the bootstrap method of NestJS
 
 ```typescript
-import { NestLogger } from 'nestjs-winston';
+import { NestLogger } from 'nestjs-winston-module';
 
 export class App {
   /**

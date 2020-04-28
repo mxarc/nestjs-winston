@@ -1,5 +1,5 @@
 {
-  "name": "nestjs-winston",
+  "name": "nestjs-winston-module",
   "version": "1.0.0",
   "description": "Common logger module for NestJS projects",
   "author": "Alfonso Reyes <alfonso@molecula.digital>",
