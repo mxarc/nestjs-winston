@@ -36,6 +36,7 @@ export const consoleTransport = new winston.transports.Stream({
   handleExceptions: true,
   format: winston.format.combine(
     winston.format.timestamp(),
+    winston.format.uncolorize(),
     winston.format.json({ space: 2 }),
     winston.format.logstash(),
     winston.format.metadata(),
