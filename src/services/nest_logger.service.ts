@@ -12,11 +12,11 @@ export class NestLogger implements NestLoggerService {
   }
 
   log(message: any, context?: string) {
-    this.logger.setContext(context || 'App');
+    this.logger.setContext(context);
     this.logger.info(message);
   }
   error(message: any, trace?: string, context?: string) {
-    this.logger.setContext(context || 'App');
+    this.logger.setContext(context);
     this.logger.error(message, trace);
   }
   warn(message: any, context?: string) {

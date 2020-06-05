@@ -1,5 +1,7 @@
+import PrettyError from 'pretty-error';
 import stripAnsi from 'strip-ansi';
 import winston from 'winston';
+const pe = new PrettyError();
 
 export const devTransport = new winston.transports.Stream({
   stream: process.stdout,
@@ -15,16 +17,15 @@ export const devTransport = new winston.transports.Stream({
       // format for timestamp
       const ts = timestamp.slice(0, 19).replace('T', ' ');
       // logger format to console
-      const logMessage = `${ts} | ${
+      let logMessage = `${ts} | ${
         meta.context || 'App'
       } | ${level} » ${message}`;
       // as level has some hidden ansi strings, we need to strip them before comparing if level type is 'error'
-      if (stripAnsi(level) === 'error' && meta.args) {
-        // extra check if message contains args and is a valid error type
-        const error: Error | string = meta.args[0].trace || '';
-        if (error) {
-          console.log(error);
-        }
+      if (stripAnsi(level) === 'error') {
+        // render error message
+        const errorMsg = meta.extra[0]?.trace;
+        const pretty = pe.render(errorMsg);
+        logMessage += '\n' + pretty;
       }
       return logMessage;
     }),

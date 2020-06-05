@@ -29,8 +29,8 @@ export class LoggerService implements Logger {
         level: level,
         message: message,
         context: this.getLoggerContext(),
-        ...(meta[0].length >= 1 && {
-          extra: meta[0],
+        ...(meta.length >= 1 && {
+          extra: meta,
         }),
       });
     }
