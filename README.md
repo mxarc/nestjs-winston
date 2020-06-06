@@ -46,10 +46,10 @@ export class AppModule implements NestModule {}
 Then use the Logger Injector in any of your project classes
 
 ```typescript
-import { Log, Logger } from 'nestjs-winston-module';
+import { InjectLogger, WinstonLogger } from 'nestjs-winston-module';
 
 class UserService {
-  constructor(@Log(UserService.name) private readonly logger: Logger) {
+  constructor(@InjectLogger(UserService.name) private readonly logger: WinstonLogger) {
     this.logger.info('Hello world');
   }
 }

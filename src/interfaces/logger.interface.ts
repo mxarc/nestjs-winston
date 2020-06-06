@@ -1,7 +1,7 @@
 /**
  * Logger Interface
  */
-export interface Logger {
+export interface WinstonLogger {
   /**
    * Log message with `info` level
    *

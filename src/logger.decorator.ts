@@ -8,7 +8,7 @@ import { getLoggerToken } from './utils';
  * @param context Context which gets prepended before every log message
  * @returns LoggerService with prefix set
  */
-export const Log = (context = 'App') => {
+export const InjectLogger = (context = 'App') => {
   if (!LoggerModule.prefixesForLoggers.includes(context)) {
     LoggerModule.prefixesForLoggers.push(context);
   }

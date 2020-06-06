@@ -1,10 +1,10 @@
 import { Injectable, Scope } from '@nestjs/common';
 import * as os from 'os';
-import { Logger, LogLevel } from '../interfaces';
+import { LogLevel, WinstonLogger } from '../interfaces';
 import { WinstonService } from './winston.service';
 
 @Injectable({ scope: Scope.TRANSIENT })
-export class LoggerService implements Logger {
+export class LoggerService implements WinstonLogger {
   private loggerContext: string;
   private logger: WinstonService;
 

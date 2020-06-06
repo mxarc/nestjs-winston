@@ -1,3 +1,3 @@
 export * from './logger.service';
+export * from './nestLogger.service';
 export * from './winston.service';
-export * from './nest_logger.service';
