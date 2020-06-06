@@ -1,6 +1,6 @@
 {
   "name": "nestjs-winston-module",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "Common logger module for NestJS projects",
   "author": "Alfonso Reyes <alfonso@molecula.digital>",
   "license": "MIT",
