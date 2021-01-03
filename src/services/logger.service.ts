@@ -20,7 +20,7 @@ export class LoggerService implements WinstonLogger {
    * @param message Message to log
    * @param meta Extra data
    */
-  private logToWinston(level: LogLevel, message: string, ...meta: any[]): void {
+  private logToWinston(level: LogLevel, message: string, ...meta: any): void {
     const logger = this.logger.getLogger();
     if (logger) {
       logger.log({
@@ -36,11 +36,11 @@ export class LoggerService implements WinstonLogger {
     }
   }
 
-  public info(message: string, ...meta: any[]): void {
+  public info(message: string, meta?: any): void {
     this.logToWinston('info', message, meta);
   }
 
-  public error(message: string, trace?: string, ...meta: any[]): void {
+  public error(message: string, trace?: string, meta?: any): void {
     this.logToWinston('error', message, {
       ...(trace && {
         trace: trace,
@@ -49,18 +49,18 @@ export class LoggerService implements WinstonLogger {
     });
   }
 
-  public warn(message: string, ...meta: any[]): void {
+  public warn(message: string, meta?: any): void {
     this.logToWinston('warn', message, meta);
   }
 
-  public silly(message: string, ...meta: any[]): void {
+  public silly(message: string, meta?: any): void {
     this.logToWinston('silly', message, meta);
   }
-  public debug(message: string, ...meta: any[]): void {
+  public debug(message: string, meta?: any): void {
     this.logToWinston('debug', message, meta);
   }
 
-  public verbose(message: string, ...meta: any[]): void {
+  public verbose(message: string, meta?: any): void {
     this.logToWinston('verbose', message, meta);
   }
 

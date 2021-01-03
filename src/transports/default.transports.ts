@@ -1,7 +1,7 @@
-import PrettyError from 'pretty-error';
-import stripAnsi from 'strip-ansi';
+import prettyError from 'pretty-error';
 import winston from 'winston';
-const pe = new PrettyError();
+
+const pe = new prettyError();
 
 export const devTransport = new winston.transports.Stream({
   stream: process.stdout,
@@ -9,24 +9,24 @@ export const devTransport = new winston.transports.Stream({
   format: winston.format.combine(
     winston.format.timestamp(), // add timestamp key
     winston.format.colorize(), // add color to the level tag
-    winston.format.simple(),
-    /** custom log format for development */
     winston.format.printf((info) => {
       // unpack variables
       const { level, message, timestamp, ...meta } = info;
       // format for timestamp
-      const ts = timestamp.slice(0, 19).replace('T', ' ');
+      const ts: string = timestamp.slice(0, 19).replace('T', ' ').split(' ')[1];
       // logger format to console
-      let logMessage = `${ts} | ${
-        meta.context || 'App'
-      } | ${level} » ${message}`;
-      // as level has some hidden ansi strings, we need to strip them before comparing if level type is 'error'
-      if (stripAnsi(level) === 'error') {
-        // render error message
-        const errorMsg = meta.extra[0]?.trace;
-        const pretty = pe.render(errorMsg);
-        logMessage += '\n' + pretty;
-      }
+      const { extra, context } = meta;
+      let logMessage = `${level}(${context || 'App'}) @ ${ts}  ${message}`;
+      try {
+        const object = extra[0];
+        if (object.meta) {
+          logMessage += `\n${JSON.stringify(object.meta, null, 2)}`;
+        }
+        if (object.trace) {
+          const pretty = pe.render(object.trace);
+          logMessage += `\n${pretty}`;
+        }
+      } catch (error) {}
       return logMessage;
     }),
   ),

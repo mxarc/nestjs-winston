@@ -2,3 +2,4 @@
 1.0.1 - refactored some methods
 1.0.2 - fixed console transport, it now removes color from output
 2.0.0 - changed injector class name and logger interface, this is a breaking change
+2.0.1 - fixed dev transport
